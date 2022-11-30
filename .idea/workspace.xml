@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acfb8f0a-d1f6-4768-908e-c312b4100917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Case2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/ManageAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Compare/CompareByNumberRoom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Compare/CompareByPrice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MainAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MainCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model/Room.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model/RoomCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/ManageAccountAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/ManageRoomAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/ManageRoomCustomer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/io/ReadAndWrite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/memo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ManageAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageAccount.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +47,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/hungchivang/IdeaProjects/untitled1/src/luyentap/nhanvien",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MainCustomer">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Case2" />
@@ -53,9 +61,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainAdmin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainAdmin" />
+      <module name="Case2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainCustomer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainCustomer" />
+      <module name="Case2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MainCustomer" />
+        <item itemvalue="Application.MainAdmin" />
       </list>
     </recent_temporary>
   </component>
@@ -67,8 +90,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669704222075</updated>
+      <workItem from="1669811593520" duration="39000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

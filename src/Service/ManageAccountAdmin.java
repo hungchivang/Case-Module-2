@@ -1,36 +1,40 @@
 package Service;
 
 import Model.Account;
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ManageAccount {
+public class ManageAccountAdmin {
     Scanner scanner = new Scanner(System.in);
+    List<Account> accountsAdmin = new ArrayList<>();
 
-    List<Account> accounts = new ArrayList<>();
 
     public void Register() {
         String username;
         String password;
         while (true) {
-            try{
+            try {
                 System.out.println("Nhập tài khoản");
                 username = scanner.nextLine();
                 int index = CheckUsername(username);
                 if (index < 0) {
-                    if(validateUserName(username)){
+                    if (validateUserName(username)) {
                         break;
-                    }else {
+                    } else {
                         System.out.println("Xin vui lòng nhập ít nhất 6-20 kí tự");
                     }
                 } else {
                     System.out.println("Tài khoản đã tồn tại");
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -48,14 +52,13 @@ public class ManageAccount {
                 e.printStackTrace();
             }
         }
-        System.out.println("Xin chào : "+ username);
-        accounts.add(new Account(username, password));
-
+        System.out.println("Xin chào : " + username);
+        accountsAdmin.add(new Account(username, password));
     }
 
     public int CheckUsername(String username) {
-        for (int i = 0; i < accounts.size(); i++) {
-            if (username.equals(accounts.get(i).getUsername())) return i;
+        for (int i = 0; i < accountsAdmin.size(); i++) {
+            if (username.equals(accountsAdmin.get(i).getUsername())) return i;
         }
         return -1;
     }
@@ -67,8 +70,8 @@ public class ManageAccount {
         String password = scanner.nextLine();
         int index = CheckUsername(username);
         if (index >= 0) {
-            for (int i = 0; i < accounts.size(); i++) {
-                if (password.equals(accounts.get(index).getPassword())) {
+            for (int i = 0; i < accountsAdmin.size(); i++) {
+                if (password.equals(accountsAdmin.get(index).getPassword())) {
                     System.out.println("Đăng nhập thành công");
                     return;
                 }
@@ -84,14 +87,13 @@ public class ManageAccount {
         String username = scanner.nextLine();
         System.out.println("Nhập mật khẩu ");
         String password = scanner.nextLine();
-        String newPassword;
         int index = CheckUsername(username);
         if (index >= 0) {
-            for (int i = 0; i < accounts.size(); i++) {
-                if (accounts.get(index).getPassword().equals(password)) {
+            for (int i = 0; i < accountsAdmin.size(); i++) {
+                if (accountsAdmin.get(index).getPassword().equals(password)) {
                     System.out.println("Nhập mật khẩu mới");
-                    newPassword = scanner.nextLine();
-                    accounts.set(index,new Account(username, newPassword));
+                    String newPassword = scanner.nextLine();
+                    accountsAdmin.set(index, new Account(username, newPassword));
                     System.out.println("Mật khẩu đã được thay đổi");
                     return;
                 }
@@ -102,33 +104,21 @@ public class ManageAccount {
         }
     }
 
-    public boolean validateUserName(String regex){
+    public boolean validateUserName(String regex) {
         Pattern pattern = Pattern.compile("^[A-Za-z0-9].{6,20}$");
         Matcher matcher = pattern.matcher(regex);
         return matcher.matches();
     }
 
-
-    public boolean validatePassWord(String regex){
+    public boolean validatePassWord(String regex) {
         Pattern pattern = Pattern.compile("^[A-Z][A-Za-z0-9].{6,}$");
         Matcher matcher = pattern.matcher(regex);
         return matcher.matches();
     }
 
-    public int validateInt() {
+    public List<Account> readAdmin() {
         try {
-            int number = Integer.parseInt(scanner.nextLine());
-            if (number >= 0) return number;
-            throw new Exception();
-        } catch (Exception e) {
-            System.out.println("Phải nhập số ");
-            return validateInt();
-        }
-    }
-
-    public List<Account> readCustomer() {
-        try {
-            FileReader fileReader = new FileReader("memo.txt");
+            FileReader fileReader = new FileReader("accAdmin.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while (true) {
@@ -139,22 +129,21 @@ public class ManageAccount {
                 String[] txt = line.split(";");
                 String username = txt[0];
                 String password = txt[1];
-                accounts.add(new Account(username, password));
+                accountsAdmin.add(new Account(username, password));
             }
             bufferedReader.close();
             fileReader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return accounts;
+        return accountsAdmin;
     }
 
-
-    public void writeCustomer(List<Account> accounts) {
+    public void writeAdmin(List<Account> accountsAdmin) {
         try {
-            FileWriter fileWriter = new FileWriter("memo.txt");
+            FileWriter fileWriter = new FileWriter("accAdmin.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Account account : accounts) {
+            for (Account account : accountsAdmin) {
                 bufferedWriter.write(account.toString());
                 bufferedWriter.newLine();
             }
@@ -164,6 +153,4 @@ public class ManageAccount {
             e.printStackTrace();
         }
     }
-
 }
-
