@@ -1,13 +1,13 @@
 package Compare;
 
-import Model.RoomCustomer;
+import Model.Room;
 
 import java.util.Comparator;
 
-public class CompareByNumberRoom implements Comparator<RoomCustomer> {
+public class CompareByNumberRoom implements Comparator<Room> {
 
     @Override
-    public int compare(RoomCustomer o1, RoomCustomer o2) {
+    public int compare(Room o1, Room o2) {
         return o1.getNumberRoom()- o2.getNumberRoom();
     }
 }

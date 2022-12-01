@@ -1,17 +1,24 @@
 package Service;
 
 import Model.Account;
+import Model.Room;
+import view.ViewCustomer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static java.lang.Integer.parseInt;
 
 public class ManageAccount {
     Scanner scanner = new Scanner(System.in);
-
+ViewCustomer viewCustomer = new ViewCustomer();
     List<Account> accounts = new ArrayList<>();
+
+
 
     public void Register() {
         String username;
@@ -48,9 +55,28 @@ public class ManageAccount {
                 e.printStackTrace();
             }
         }
-        System.out.println("Xin chào : "+ username);
-        accounts.add(new Account(username, password));
-
+        System.out.println("Nhập tên ");
+        String name = scanner.nextLine();
+        System.out.println("Nhập tuổi");
+        int age = validateAge();
+        String sdt;
+        while (true) {
+            try {
+                System.out.println("Nhập số điện thoại");
+                sdt = scanner.nextLine();
+                if (validateSdt(sdt)) {
+                    break;
+                } else {
+                    System.out.println("Nhập đủ 10 kí tự");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Nhập giới tính");
+        String gender = validateGender();
+        accounts.add(new Account(username, password,name,age,sdt,gender));
+        System.out.println("Xin chào : "+ name);
     }
 
     public int CheckUsername(String username) {
@@ -70,6 +96,7 @@ public class ManageAccount {
             for (int i = 0; i < accounts.size(); i++) {
                 if (password.equals(accounts.get(index).getPassword())) {
                     System.out.println("Đăng nhập thành công");
+                    viewCustomer.viewCustomer();
                     return;
                 }
             }
@@ -82,16 +109,15 @@ public class ManageAccount {
     public void SetPassword() {
         System.out.println("Nhập tài khoản cũ ");
         String username = scanner.nextLine();
-        System.out.println("Nhập mật khẩu ");
+        System.out.println("Nhập mật khẩu cũ");
         String password = scanner.nextLine();
-        String newPassword;
         int index = CheckUsername(username);
         if (index >= 0) {
             for (int i = 0; i < accounts.size(); i++) {
                 if (accounts.get(index).getPassword().equals(password)) {
                     System.out.println("Nhập mật khẩu mới");
-                    newPassword = scanner.nextLine();
-                    accounts.set(index,new Account(username, newPassword));
+                    String newPassword = scanner.nextLine();
+                    accounts.set(index,new Account(username, newPassword,accounts.get(i).getName(),accounts.get(i).getAge(),accounts.get(i).getSdt(),accounts.get(i).getGender()));
                     System.out.println("Mật khẩu đã được thay đổi");
                     return;
                 }
@@ -128,7 +154,7 @@ public class ManageAccount {
 
     public List<Account> readCustomer() {
         try {
-            FileReader fileReader = new FileReader("memo.txt");
+            FileReader fileReader = new FileReader("accCustomer.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while (true) {
@@ -136,10 +162,14 @@ public class ManageAccount {
                 if (line == null) {
                     break;
                 }
-                String[] txt = line.split(";");
+                String[] txt = line.split(", ");
                 String username = txt[0];
                 String password = txt[1];
-                accounts.add(new Account(username, password));
+                String name = txt[2];
+                int age = parseInt(txt[3]);
+                String sdt = txt[4];
+                String gender = txt[5];
+                accounts.add(new Account(username, password,name,age,sdt,gender));
             }
             bufferedReader.close();
             fileReader.close();
@@ -152,16 +182,43 @@ public class ManageAccount {
 
     public void writeCustomer(List<Account> accounts) {
         try {
-            FileWriter fileWriter = new FileWriter("memo.txt");
+            FileWriter fileWriter = new FileWriter("accCustomer.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Account account : accounts) {
-                bufferedWriter.write(account.toString());
+                bufferedWriter.write(account.getUsername()+ ", "+ account.getPassword()+ ", "+account.getName()+", "+account.getAge()+", "+account.getSdt()+", "+account.getGender());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
             fileWriter.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public boolean validateSdt(String regex) {
+        Pattern pattern = Pattern.compile("^[0-9]{10}$");
+        Matcher matcher = pattern.matcher(regex);
+        return matcher.matches();
+    }
+
+    public int validateAge() {
+        try {
+            int age = Integer.parseInt(scanner.nextLine());
+            if (age >= 18 && age <= 65) return age;
+            throw new Exception();
+        } catch (Exception e) {
+            System.out.println("Phải nhập độ tuổi từ ( 18 -> 65 )");
+            return validateAge();
+        }
+    }
+
+    public String validateGender() {
+        try {
+            String gender = scanner.nextLine();
+            if (Objects.equals(gender, "nam") || Objects.equals(gender, "nu")) return gender;
+            throw new Exception();
+        } catch (Exception e) {
+            System.out.println("Phải nhập :nam hoặc nu");
+            return validateGender();
         }
     }
 

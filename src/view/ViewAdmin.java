@@ -1,10 +1,21 @@
+package view;
+
+import Model.Account;
 import Model.Room;
+import Service.ManageAccount;
+import Service.ManageAccountAdmin;
 import Service.ManageRoomAdmin;
+import Service.MangeHotel;
+
 import java.util.List;
 
-public class MainAdmin {
-    public static void main(String[] args) {
+public class ViewAdmin {
+    public void viewAdmin() {
+        ManageAccountAdmin manageAccountAdmin = new ManageAccountAdmin();
+        List<Account> accountAdmin = manageAccountAdmin.readAdmin();
         ManageRoomAdmin manageRoomAdmin = new ManageRoomAdmin();
+        MangeHotel mangeHotel = new MangeHotel();
+        mangeHotel.readRoomBooked();
 
         List<Room> rooms = manageRoomAdmin.readRoom();
 
@@ -15,6 +26,11 @@ public class MainAdmin {
             System.out.println("2. Xóa phòng");
             System.out.println("3. Sửa phòng");
             System.out.println("4. Hiển thị");
+            System.out.println("5. Kiểm tra phòng còn trống");
+            System.out.println("6. Hiển thị thông tin khách hàng đã đặt phòng");
+            System.out.println("7. Đổi mật khẩu");
+            System.out.println("8. Hiển thị danh sách người dùng");
+            System.out.println("9. Đăng xuất");
             System.out.println("0. Thoát");
             System.out.println("---------------------");
             choice = manageRoomAdmin.validateInt();
@@ -35,6 +51,21 @@ public class MainAdmin {
                 case 4:
                     manageRoomAdmin.show();
                     break;
+                case 5:
+                    mangeHotel.showRoomNotBook();
+                    break;
+                case 6:
+                    mangeHotel.showCustomer();
+                    break;
+                case 7:
+                    manageAccountAdmin.SetPassword();
+                    manageAccountAdmin.writeAdmin(accountAdmin);
+                    break;
+                case 8:
+                    manageAccountAdmin.showAccCustomer();
+                    break;
+                case 9:
+                    return;
                 case 0:
                     manageRoomAdmin.writeRoom(rooms);
                     break;

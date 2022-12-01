@@ -1,3 +1,0 @@
-1, 3, 1000.0, ha noi, mat me
-2, 5, 12000.0, bac ninh, thoang
-3, 4, 2000.0, ha nam, ok

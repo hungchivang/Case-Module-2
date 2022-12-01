@@ -13,7 +13,7 @@
 //
 //    public List<Account> readCustomer() {
 //        try {
-//            FileReader fileReader = new FileReader("memo.txt");
+//            FileReader fileReader = new FileReader("accCustomer.txt");
 //            BufferedReader bufferedReader = new BufferedReader(fileReader);
 //            String line;
 //            while (true) {
@@ -37,7 +37,7 @@
 //
 //    public void writeCustomer(List<Account> accounts) {
 //        try {
-//            FileWriter fileWriter = new FileWriter("memo.txt");
+//            FileWriter fileWriter = new FileWriter("accCustomer.txt");
 //            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 //            for (Account account : accounts) {
 //                bufferedWriter.write(account.toString());

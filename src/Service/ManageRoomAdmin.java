@@ -1,14 +1,13 @@
 package Service;
 
-import Model.Account;
 import Model.Room;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ManageRoomAdmin {
@@ -30,7 +29,9 @@ public class ManageRoomAdmin {
         String address = scanner.nextLine();
         System.out.println("Nhập mô tả");
         String describe = scanner.nextLine();
-        return new Room(numberRoom, price,address,describe);
+        System.out.println("Tình trạng ");
+        String status = validateStatus();
+        return new Room(numberRoom, price,address,describe,status);
     }
 
     public void add(){
@@ -54,7 +55,8 @@ public class ManageRoomAdmin {
                         "2. Sửa giá tiền\n" +
                         "3. Sửa địa chỉ\n" +
                         "4. Sửa mô tả\n" +
-                        "5. OK");
+                        "5. Sửa tình trạng\n" +
+                        "6. OK");
                 System.out.println("Chọn ");
                 System.out.println("---------------------");
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -62,24 +64,29 @@ public class ManageRoomAdmin {
                     case 1:
                         System.out.println("Nhập số phòng cần sửa");
                         int numberRoom = validateInt();
-                        rooms.set(index, new Room(id, numberRoom, rooms.get(index).getPrice(), rooms.get(index).getAddress(), rooms.get(index).getDescribe()));
+                        rooms.set(index, new Room(id, numberRoom, rooms.get(index).getPrice(), rooms.get(index).getAddress(), rooms.get(index).getDescribe(),rooms.get(index).getStatus()));
                         break;
                     case 2:
                         System.out.println("Nhập giá tiền cần sửa");
                         double price = validateDouble();
-                        rooms.set(index, new Room(id,rooms.get(index).getNumberRoom(), price, rooms.get(index).getAddress(), rooms.get(index).getDescribe()));
+                        rooms.set(index, new Room(id,rooms.get(index).getNumberRoom(), price, rooms.get(index).getAddress(), rooms.get(index).getDescribe(),rooms.get(index).getStatus()));
                         break;
                     case 3:
                         System.out.println("Sửa địa chỉ");
                         String address = scanner.nextLine();
-                        rooms.set(index, new Room(id, rooms.get(index).getNumberRoom(), rooms.get(index).getPrice(),address,rooms.get(index).getDescribe()));
+                        rooms.set(index, new Room(id, rooms.get(index).getNumberRoom(), rooms.get(index).getPrice(),address,rooms.get(index).getDescribe(),rooms.get(index).getStatus()));
                         break;
                     case 4:
                         System.out.println("Sửa mô tả");
                         String describe = scanner.nextLine();
-                        rooms.set(index, new Room(id, rooms.get(index).getNumberRoom(), rooms.get(index).getPrice(),rooms.get(index).getAddress(),describe ));
+                        rooms.set(index, new Room(id, rooms.get(index).getNumberRoom(), rooms.get(index).getPrice(),rooms.get(index).getAddress(),describe,rooms.get(index).getStatus() ));
                         break;
                     case 5:
+                        System.out.println("Sửa đổi tình trạng");
+                        String status = scanner.nextLine();
+                        rooms.set(index, new Room(id, rooms.get(index).getNumberRoom(), rooms.get(index).getPrice(),rooms.get(index).getAddress(),rooms.get(index).getDescribe(),status));
+                        break;
+                    case 6:
                         return;
                 }
                 System.out.println("Đã sửa thông tin phòng");
@@ -99,6 +106,58 @@ public class ManageRoomAdmin {
         }
     }
 
+    public List<Room> readRoom() {
+        try {
+            FileReader fileReader = new FileReader("roomAdmin.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while (true) {
+                line = bufferedReader.readLine();
+                if (line == null) {
+                    break;
+                }
+                String[] txt = line.split(", ");
+                int roomId = Integer.parseInt(txt[0]);
+                int numberRoom = Integer.parseInt(txt[1]);
+                double price = Double.parseDouble(txt[2]);
+                String address = txt[3];
+                String describe = txt[4];
+                String status = txt[5];
+                rooms.add(new Room(roomId,numberRoom,price,address,describe,status));
+            }
+            bufferedReader.close();
+            fileReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rooms;
+    }
+
+        public void writeRoom(List<Room> rooms) {
+        try {
+            FileWriter fileWriter = new FileWriter("roomAdmin.txt");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Room room : rooms) {
+                bufferedWriter.write(room.getRoomId()+ ", "+ room.getNumberRoom()+", "+room.getPrice()+", "+room.getAddress()+", "+room.getDescribe()+ ", "+room.getStatus());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            fileWriter.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String validateStatus() {
+        try {
+            String status = scanner.nextLine();
+            if (Objects.equals(status, "yes") || Objects.equals(status, "no")) return status;
+            throw new Exception();
+        } catch (Exception e) {
+            System.out.println("Phải nhập : yes or no ");
+            return validateStatus();
+        }
+    }
     public int validateInt() {
         try {
             int number = Integer.parseInt(scanner.nextLine());
@@ -118,48 +177,6 @@ public class ManageRoomAdmin {
         } catch (Exception e) {
             System.out.println("Phai nhap so ( > 0)");
             return validateDouble();
-        }
-    }
-
-    public List<Room> readRoom() {
-        try {
-            FileReader fileReader = new FileReader("roomAdmin.txt");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            while (true) {
-                line = bufferedReader.readLine();
-                if (line == null) {
-                    break;
-                }
-                String[] txt = line.split(";");
-                int roomId = Integer.parseInt(txt[0]);
-                int numberRoom = Integer.parseInt(txt[1]);
-                double price = Double.parseDouble(txt[2]);
-                String address = txt[3];
-                String describe = txt[4];
-                rooms.add(new Room(roomId,numberRoom,price,address,describe));
-            }
-            bufferedReader.close();
-            fileReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return rooms;
-    }
-
-
-    public void writeRoom(List<Room> rooms) {
-        try {
-            FileWriter fileWriter = new FileWriter("roomAdmin.txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Room room : rooms) {
-                bufferedWriter.write(room.getRoomId()+ ", "+ room.getNumberRoom()+", "+room.getPrice()+", "+room.getAddress()+", "+room.getDescribe());
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

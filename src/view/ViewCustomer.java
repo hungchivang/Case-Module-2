@@ -1,24 +1,36 @@
-import Model.RoomCustomer;
+package view;
+
+import Model.Account;
+import Model.Room;
+import Service.ManageAccount;
 import Service.ManageRoomCustomer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainCustomer {
-    public static void main(String[] args) {
+public class ViewCustomer {
+
+    public void viewCustomer() {
         Scanner scanner = new Scanner(System.in);
         ManageRoomCustomer manageRoomCustomer = new ManageRoomCustomer();
         manageRoomCustomer.copyFile();
-        manageRoomCustomer.readFile();
-        List<RoomCustomer> listRoom = new ArrayList<>();
+        List<Room> listRoom = manageRoomCustomer.readFile();
+
+        ManageAccount manageAccount = new ManageAccount();
+        List<Account> accounts = manageAccount.readCustomer();
 
         int choice = -1;
         while (choice != 0){
             System.out.println("---------------------");
             System.out.println("1. Sắp xếp");
             System.out.println("2. Tìm kiếm");
-            System.out.println("0. Thoát");
+            System.out.println("3. Hiển thị danh sách phòng");
+            System.out.println("4. Đặt phòng");
+            System.out.println("5. Hủy phòng");
+            System.out.println("6. Hiển thị phòng đã đặt");
+            System.out.println("7. Hiển thị phòng còn trống");
+            System.out.println("8. Đổi mật khẩu");
+            System.out.println("0. Đăng xuất");
             System.out.println("---------------------");
             choice = manageRoomCustomer.validateInt();
             switch (choice){
@@ -47,18 +59,24 @@ public class MainCustomer {
                     int choice3 = -1;
                     while (choice3 != 0){
                         System.out.println("---------------------");
-                        System.out.println("1. Tìm kiếm theo giá");
-                        System.out.println("2. Tìm kếm theo địa chỉ");
+                        System.out.println("1. Tìm kiếm theo mức giá từ 1000 -> 2500");
+                        System.out.println("2. Tìm kiếm theo mức giá từ 2500 -> 4000");
+                        System.out.println("3. Tìm kiếm theo mức giá trên 4000");
+                        System.out.println("4. Tìm kếm theo địa chỉ");
                         System.out.println("0 . Thoát");
                         System.out.println("---------------------");
                         choice3 = manageRoomCustomer.validateInt();
                         switch (choice3){
                             case 1:
-                                System.out.println("Nhập tiền muốn tìm");
-                                double price = manageRoomCustomer.validateDouble();
-                                manageRoomCustomer.SearchByPrice(price);
+                                manageRoomCustomer.SearchByPrice1();
                                 break;
                             case 2:
+                                manageRoomCustomer.SearchByPrice2();
+                                break;
+                            case 3:
+                                manageRoomCustomer.SearchByPrice3();
+                                break;
+                            case 4:
                                 System.out.println("Nhập địa chỉ muốn tìm");
                                 String name = scanner.nextLine();
                                 manageRoomCustomer.SearchByAddress(name);
@@ -68,7 +86,31 @@ public class MainCustomer {
                         }
                     }
                     break;
+                case 3:
+                    manageRoomCustomer.showRoom();
+                    break;
+                case 4:
+                    System.out.println("Nhập số phòng cần đặt");
+                    int roomIdBook = manageRoomCustomer.validateInt();
+                    manageRoomCustomer.bookRoom(roomIdBook);
+                    break;
+                case 5:
+                    System.out.println("Nhập số phòng cần hủy");
+                    int roomIdCancel = manageRoomCustomer.validateInt();
+                    manageRoomCustomer.CancelRoom(roomIdCancel);
+                    break;
+                case 6:
+                    manageRoomCustomer.showRoomBooked();
+                    break;
+                case 7:
+                    manageRoomCustomer.showRoomNotBook();
+                    break;
+                case 8:
+                    manageAccount.SetPassword();
+                    manageAccount.writeCustomer(accounts);
+                    break;
                 case 0:
+                    manageRoomCustomer.writeFile(listRoom);
                     break;
             }
         }
