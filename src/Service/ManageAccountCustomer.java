@@ -3,6 +3,7 @@ package Service;
 import Model.Account;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -109,9 +110,10 @@ public class ManageAccountCustomer {
                         System.out.println("4. Đặt phòng");
                         System.out.println("5. Hủy đặt phòng");
                         System.out.println("6. Hiển thị phòng đã đặt");
-                        System.out.println("7. Hiển thị phòng còn trống");
-                        System.out.println("8. Đổi mật khẩu");
-                        System.out.println("9. Đăng xuất");
+                        System.out.println("7. Thanh toán");
+                        System.out.println("8. Hiển thị phòng còn trống");
+                        System.out.println("9. Đổi mật khẩu");
+                        System.out.println("10. Đăng xuất");
                         System.out.println("0. Thoát");
                         System.out.println("---------------------");
                         choice = manageRoomCustomer.validateInt();
@@ -185,13 +187,16 @@ public class ManageAccountCustomer {
                                 manageRoomCustomer.showRoomBooked(username);
                                 break;
                             case 7:
-                                manageRoomCustomer.showRoomNotBook();
+                                manageRoomCustomer.totalAmount(username);
                                 break;
                             case 8:
+                                manageRoomCustomer.showRoomNotBook();
+                                break;
+                            case 9:
                                 manageAccountCustomer.SetPassword();
                                 manageAccountCustomer.writeCustomer(accounts);
                                 break;
-                            case 9:
+                            case 10:
                                 manageRoomCustomer.writeFile();
                                 return;
                             case 0:
@@ -253,6 +258,7 @@ public class ManageAccountCustomer {
             return validateInt();
         }
     }
+
 
     public List<Account> readCustomer() {
         try {

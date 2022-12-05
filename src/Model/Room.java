@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Room extends Home implements Serializable {
     private int roomId;
@@ -11,6 +12,25 @@ public class Room extends Home implements Serializable {
 
     private String status;
     private String username;
+
+    private LocalDate dayIn;
+    private LocalDate dayOut;
+
+    public LocalDate getDayIn() {
+        return dayIn;
+    }
+
+    public void setDayIn(LocalDate dayIn) {
+        this.dayIn = dayIn;
+    }
+
+    public LocalDate getDayOut() {
+        return dayOut;
+    }
+
+    public void setDayOut(LocalDate dayOut) {
+        this.dayOut = dayOut;
+    }
 
     public String getUsername() {
         return username;
@@ -80,6 +100,18 @@ public class Room extends Home implements Serializable {
         this.status = status;
     }
 
+    public Room(int roomId, int numberRoom, double price, String address, String describe, String status, String username, LocalDate dayIn, LocalDate dayOut) {
+        this.roomId = roomId;
+        this.numberRoom = numberRoom;
+        this.price = price;
+        this.address = address;
+        this.describe = describe;
+        this.status = status;
+        this.username = username;
+        this.dayIn = dayIn;
+        this.dayOut = dayOut;
+    }
+
     public Room(int roomId, int numberRoom, double price, String address, String describe, String status, String username) {
         this.roomId = roomId;
         this.numberRoom = numberRoom;
@@ -89,7 +121,6 @@ public class Room extends Home implements Serializable {
         this.status = status;
         this.username = username;
     }
-
 
 
     @Override

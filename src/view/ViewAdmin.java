@@ -24,7 +24,7 @@ public class ViewAdmin {
             System.out.println("1. Thêm phòng");
             System.out.println("2. Xóa phòng");
             System.out.println("3. Sửa phòng");
-            System.out.println("4. Hiển thị");
+            System.out.println("4. Hiển thị danh sách phòng ");
             System.out.println("5. Hiển thị phòng còn trống");
             System.out.println("6. Hiển thị thông tin khách hàng đã đặt phòng");
             System.out.println("7. Đổi mật khẩu");
