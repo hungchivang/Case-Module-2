@@ -5,26 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acfb8f0a-d1f6-4768-908e-c312b4100917" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/io/ReadAndWriteAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/io/ReadAndWriteRoomAdmin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/io/ReadAndWriteRoomCustomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accAdmin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/accAdmin.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accCustomer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/accCustomer.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/roomAdmin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/roomAdmin.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/roomCustomer.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Customer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Home.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ManageAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageAccountCustomer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ManageAccountAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageAccountAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ManageRoomAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageRoomAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ManageAccountCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageAccountCustomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/ManageHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageHome.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/ManageRoomCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageRoomCustomer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/MangeHotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/ReadAndWrite.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ViewAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ViewCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewCustomer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,15 +39,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/hungchivang/IdeaProjects/untitled1/src/luyentap/nhanvien",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/hungchivang/IdeaProjects/Case2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />

@@ -2,6 +2,7 @@ package Service;
 
 import Compare.CompareByNumberRoom;
 import Compare.CompareByPrice;
+import Model.Account;
 import Model.Room;
 
 import java.io.*;
@@ -15,16 +16,18 @@ public class ManageRoomCustomer {
     Scanner scanner = new Scanner(System.in);
     List<Room> listRoom = new ArrayList<>();
 
+    ManageAccountCustomer manageAccountCustomer = new ManageAccountCustomer();
+    List<Account> accounts = manageAccountCustomer.readCustomer();
 
     public void showRoom() {
-        for (Room customer : listRoom) {
-            System.out.println(customer);
+        for (Room room : listRoom) {
+            System.out.println(room);
         }
     }
 
-    public void showRoomBooked(){
-        for (Room room : listRoom) {
-            if (room.getStatus().equals("Đã đặt")) {
+    public void showRoomBooked(String username){
+        for (Room room: listRoom) {
+            if (room.getStatus().equals("Đã đặt") && room.getUsername().equals(username)) {
                 System.out.println(room);
             }
         }
@@ -141,28 +144,34 @@ public class ManageRoomCustomer {
         return -1;
     }
 
-    public void bookRoom(int id) {
-        int index = CheckRoomID(id);
-        if (index >= 0) {
-            for (int i = 0; i < listRoom.size(); i++) {
-                if (listRoom.get(index).getStatus().equals("yes")) {
-                    String status = "Đã đặt";
-                    listRoom.set(index, new Room(id, listRoom.get(index).getNumberRoom(), listRoom.get(index).getPrice(), listRoom.get(index).getAddress(), listRoom.get(index).getDescribe(), status));
-                    System.out.println("Đặt phòng thành công");
-                    return;
-                }
-            }
-            System.out.println("Không thể đặt phòng");
-        } else {
-            System.out.println("Không có  id phòng này");
+    public int CheckUsername(String username) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (username.equals(accounts.get(i).getUsername())) return i;
         }
+        return -1;
+    }
+    public void bookRoom(int id,String username) {
+        int index = CheckRoomID(id);
+            if (index >= 0) {
+                for (int i = 0; i < listRoom.size(); i++) {
+                    if (listRoom.get(index).getStatus().equals("yes")) {
+                        String status = "Đã đặt";
+                        listRoom.set(index, new Room(id, listRoom.get(index).getNumberRoom(), listRoom.get(index).getPrice(), listRoom.get(index).getAddress(), listRoom.get(index).getDescribe(), status,username));
+                        System.out.println("Đặt phòng thành công");
+                        return;
+                    }
+                }
+                System.out.println("Không thể đặt phòng");
+            } else {
+                System.out.println("Không có  id phòng này");
+            }
     }
 
-    public void CancelRoom(int id) {
+    public void CancelRoom(int id,String username) {
         int index = CheckRoomID(id);
         if (index >= 0) {
             for (int i = 0; i < listRoom.size(); i++) {
-                if (listRoom.get(index).getStatus().equals("Đã đặt")) {
+                if (listRoom.get(index).getStatus().equals("Đã đặt") && listRoom.get(index).getUsername().equals(username)) {
                     String status = "yes";
                     listRoom.set(index, new Room(id, listRoom.get(index).getNumberRoom(), listRoom.get(index).getPrice(), listRoom.get(index).getAddress(), listRoom.get(index).getDescribe(), status));
                     System.out.println("Hủy phòng thành công");

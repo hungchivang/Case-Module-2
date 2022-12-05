@@ -38,14 +38,17 @@ ManageAccountCustomer manageAccountCustomer= new ManageAccountCustomer();
 
     public void showCustomer() {
         for (int i = 0; i < homes.size(); i++) {
-            if (homes.get(i).getStatus().equals("Đã đặt")) {
-                System.out.println("roomId = " + homes.get(i).getRoomId() +
-                        ", price = " + homes.get(i).getPrice() +
-                        ", name = " + accounts.get(i).getName() +
-                        ", age = " + accounts.get(i).getAge() +
-                        ", sdt = " + accounts.get(i).getSdt() +
-                        ", gender = " + accounts.get(i).getGender());
+            for (int j = 0; j < accounts.size(); j++) {
+                if (homes.get(i).getStatus().equals("Đã đặt") && homes.get(i).getUsername().equals(accounts.get(j).getUsername())) {
+                    System.out.println("roomId = " + homes.get(i).getRoomId() +
+                            ", price = " + homes.get(i).getPrice() +
+                            ", name = " + accounts.get(j).getName() +
+                            ", age = " + accounts.get(j).getAge() +
+                            ", sdt = " + accounts.get(j).getSdt() +
+                            ", gender = " + accounts.get(j).getGender());
+                }
             }
+
         }
     }
 

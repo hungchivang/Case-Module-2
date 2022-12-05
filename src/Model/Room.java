@@ -10,7 +10,15 @@ public class Room extends Home implements Serializable {
     private String describe;
 
     private String status;
+    private String username;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getRoomId() {
         return roomId;
@@ -72,13 +80,17 @@ public class Room extends Home implements Serializable {
         this.status = status;
     }
 
-    public Room(int numberRoom, double price, String address, String describe, String status) {
+    public Room(int roomId, int numberRoom, double price, String address, String describe, String status, String username) {
+        this.roomId = roomId;
         this.numberRoom = numberRoom;
         this.price = price;
         this.address = address;
         this.describe = describe;
         this.status = status;
+        this.username = username;
     }
+
+
 
     @Override
     public String toString() {
