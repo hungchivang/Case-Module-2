@@ -1,7 +1,6 @@
 package Service;
 
 import Model.Account;
-import Model.Room;
 import view.ViewAdmin;
 
 import java.io.BufferedReader;
@@ -122,8 +121,12 @@ ViewAdmin viewAdmin = new ViewAdmin();
     }
 
     public void showAccCustomer(){
+        readAccCustomer();
         for (int i = 0; i < accountsCustomer.size(); i++) {
-            System.out.println(accountsCustomer);
+            System.out.println("name = " +accountsCustomer.get(i).getName()+
+                    ", age = " +accountsCustomer.get(i).getAge()+
+                    ", sdt = "+ accountsCustomer.get(i).getSdt()+
+                    ", gender = "+accountsCustomer.get(i).getGender());
         }
     }
 

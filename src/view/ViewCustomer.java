@@ -1,8 +1,7 @@
 package view;
 
 import Model.Account;
-import Model.Room;
-import Service.ManageAccount;
+import Service.ManageAccountCustomer;
 import Service.ManageRoomCustomer;
 
 import java.util.List;
@@ -10,40 +9,41 @@ import java.util.Scanner;
 
 public class ViewCustomer {
 
+
     public void viewCustomer() {
         Scanner scanner = new Scanner(System.in);
         ManageRoomCustomer manageRoomCustomer = new ManageRoomCustomer();
-        manageRoomCustomer.copyFile();
-        List<Room> listRoom = manageRoomCustomer.readFile();
+        manageRoomCustomer.readFile();
 
-        ManageAccount manageAccount = new ManageAccount();
-        List<Account> accounts = manageAccount.readCustomer();
+        ManageAccountCustomer manageAccountCustomer = new ManageAccountCustomer();
+        List<Account> accounts = manageAccountCustomer.readCustomer();
 
-        int choice = -1;
-        while (choice != 0){
+        int choice;
+        while (true) {
             System.out.println("---------------------");
             System.out.println("1. Sắp xếp");
             System.out.println("2. Tìm kiếm");
             System.out.println("3. Hiển thị danh sách phòng");
             System.out.println("4. Đặt phòng");
-            System.out.println("5. Hủy phòng");
+            System.out.println("5. Hủy đặt phòng");
             System.out.println("6. Hiển thị phòng đã đặt");
             System.out.println("7. Hiển thị phòng còn trống");
             System.out.println("8. Đổi mật khẩu");
-            System.out.println("0. Đăng xuất");
+            System.out.println("9. Đăng xuất");
+            System.out.println("0. Thoát");
             System.out.println("---------------------");
             choice = manageRoomCustomer.validateInt();
-            switch (choice){
+            switch (choice) {
                 case 1:
                     int choice2 = -1;
-                    while (choice2 != 0){
+                    while (choice2 != 0) {
                         System.out.println("---------------------");
                         System.out.println("1. Sắp xếp theo giá");
                         System.out.println("2. Sắp xếp theo số phòng");
-                        System.out.println("0 . Thoát");
+                        System.out.println("0. Exit");
                         System.out.println("---------------------");
                         choice2 = manageRoomCustomer.validateInt();
-                        switch (choice2){
+                        switch (choice2) {
                             case 1:
                                 manageRoomCustomer.sortByPrice();
                                 break;
@@ -57,16 +57,16 @@ public class ViewCustomer {
                     break;
                 case 2:
                     int choice3 = -1;
-                    while (choice3 != 0){
+                    while (choice3 != 0) {
                         System.out.println("---------------------");
                         System.out.println("1. Tìm kiếm theo mức giá từ 1000 -> 2500");
                         System.out.println("2. Tìm kiếm theo mức giá từ 2500 -> 4000");
                         System.out.println("3. Tìm kiếm theo mức giá trên 4000");
                         System.out.println("4. Tìm kếm theo địa chỉ");
-                        System.out.println("0 . Thoát");
+                        System.out.println("0. Exit");
                         System.out.println("---------------------");
                         choice3 = manageRoomCustomer.validateInt();
-                        switch (choice3){
+                        switch (choice3) {
                             case 1:
                                 manageRoomCustomer.SearchByPrice1();
                                 break;
@@ -106,12 +106,14 @@ public class ViewCustomer {
                     manageRoomCustomer.showRoomNotBook();
                     break;
                 case 8:
-                    manageAccount.SetPassword();
-                    manageAccount.writeCustomer(accounts);
+                    manageAccountCustomer.SetPassword();
+                    manageAccountCustomer.writeCustomer(accounts);
                     break;
+                case 9:
+                    return;
                 case 0:
-                    manageRoomCustomer.writeFile(listRoom);
-                    break;
+                    manageRoomCustomer.writeFile();
+                    System.exit(0);
             }
         }
     }

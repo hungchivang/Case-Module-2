@@ -1,8 +1,6 @@
 import Model.Account;
-import Service.ManageAccount;
+import Service.ManageAccountCustomer;
 import Service.ManageAccountAdmin;
-import view.ViewAdmin;
-import view.ViewCustomer;
 
 import java.util.List;
 
@@ -11,9 +9,10 @@ public class Main {
 
         ManageAccountAdmin manageAccountAdmin = new ManageAccountAdmin();
         manageAccountAdmin.readAdmin();
+        manageAccountAdmin.readAccCustomer();
 
-        ManageAccount manageAccount = new ManageAccount();
-        List<Account> accounts = manageAccount.readCustomer();
+        ManageAccountCustomer manageAccountCustomer = new ManageAccountCustomer();
+        List<Account> accounts = manageAccountCustomer.readCustomer();
 
 
         int choice = -1;
@@ -23,30 +22,24 @@ public class Main {
             System.out.println("2. User");
             System.out.println("0. Thoát");
             System.out.println("-----------------------");
-            choice = manageAccount.validateInt();
+            choice = manageAccountCustomer.validateInt();
             switch (choice) {
                 case 1:
                     manageAccountAdmin.Login();
                     break;
                 case 2:
                     int choice1 = -1;
-                    while (choice1 != 0){
+                    while (choice1 != 0) {
                         System.out.println("-----------------");
                         System.out.println("1. Đăng nhập");
                         System.out.println("2. Đăng kí");
                         System.out.println("0. Thoát");
                         System.out.println("-----------------");
-                        choice1 = manageAccount.validateInt();
-                        switch (choice1){
-                            case 1:
-                                manageAccount.Login();
-                                break;
-                            case 2:
-                                manageAccount.Register();
-                                break;
-                            case 0:
-                                manageAccount.writeCustomer(accounts);
-                                break;
+                        choice1 = manageAccountCustomer.validateInt();
+                        switch (choice1) {
+                            case 1 -> manageAccountCustomer.Login();
+                            case 2 -> manageAccountCustomer.Register();
+                            case 0 -> manageAccountCustomer.writeCustomer(accounts);
                         }
                     }
                     break;

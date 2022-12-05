@@ -1,7 +1,8 @@
 package Model;
 
-public class Room extends Hotel{
-    static int idCurrent;
+import java.io.Serializable;
+
+public class Room extends Home implements Serializable {
     private int roomId;
     private int numberRoom;
     private double price;
@@ -10,20 +11,59 @@ public class Room extends Hotel{
 
     private String status;
 
-    public Room() {
+
+    public int getRoomId() {
+        return roomId;
     }
 
-    public Room(int numberRoom, double price, String address, String describe,String status) {
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
 
-        this.roomId = ++idCurrent;
+    public int getNumberRoom() {
+        return numberRoom;
+    }
+
+    public void setNumberRoom(int numberRoom) {
         this.numberRoom = numberRoom;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
         this.describe = describe;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public Room(int roomId, int numberRoom, double price, String address, String describe,String status) {
+    public Room() {
+    }
+
+    public Room(int roomId, int numberRoom, double price, String address, String describe, String status) {
         this.roomId = roomId;
         this.numberRoom = numberRoom;
         this.price = price;
@@ -32,9 +72,13 @@ public class Room extends Hotel{
         this.status = status;
     }
 
-
-
-
+    public Room(int numberRoom, double price, String address, String describe, String status) {
+        this.numberRoom = numberRoom;
+        this.price = price;
+        this.address = address;
+        this.describe = describe;
+        this.status = status;
+    }
 
     @Override
     public String toString() {

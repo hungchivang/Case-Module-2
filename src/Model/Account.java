@@ -1,6 +1,8 @@
 package Model;
 
-public class Account extends Hotel{
+import java.io.Serializable;
+
+public class Account extends Home implements Serializable {
     private String username;
 
     private String password;

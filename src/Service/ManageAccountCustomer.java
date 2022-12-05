@@ -1,7 +1,6 @@
 package Service;
 
 import Model.Account;
-import Model.Room;
 import view.ViewCustomer;
 
 import java.io.*;
@@ -11,33 +10,33 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import static java.lang.Integer.parseInt;
 
-public class ManageAccount {
+public class ManageAccountCustomer {
     Scanner scanner = new Scanner(System.in);
-ViewCustomer viewCustomer = new ViewCustomer();
+    ViewCustomer viewCustomer = new ViewCustomer();
     List<Account> accounts = new ArrayList<>();
-
 
 
     public void Register() {
         String username;
         String password;
         while (true) {
-            try{
+            try {
                 System.out.println("Nhập tài khoản");
                 username = scanner.nextLine();
                 int index = CheckUsername(username);
                 if (index < 0) {
-                    if(validateUserName(username)){
+                    if (validateUserName(username)) {
                         break;
-                    }else {
+                    } else {
                         System.out.println("Xin vui lòng nhập ít nhất 6-20 kí tự");
                     }
                 } else {
                     System.out.println("Tài khoản đã tồn tại");
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -75,8 +74,8 @@ ViewCustomer viewCustomer = new ViewCustomer();
         }
         System.out.println("Nhập giới tính");
         String gender = validateGender();
-        accounts.add(new Account(username, password,name,age,sdt,gender));
-        System.out.println("Xin chào : "+ name);
+        accounts.add(new Account(username, password, name, age, sdt, gender));
+        System.out.println("Xin chào : " + name);
     }
 
     public int CheckUsername(String username) {
@@ -117,7 +116,7 @@ ViewCustomer viewCustomer = new ViewCustomer();
                 if (accounts.get(index).getPassword().equals(password)) {
                     System.out.println("Nhập mật khẩu mới");
                     String newPassword = scanner.nextLine();
-                    accounts.set(index,new Account(username, newPassword,accounts.get(i).getName(),accounts.get(i).getAge(),accounts.get(i).getSdt(),accounts.get(i).getGender()));
+                    accounts.set(index, new Account(username, newPassword, accounts.get(i).getName(), accounts.get(i).getAge(), accounts.get(i).getSdt(), accounts.get(i).getGender()));
                     System.out.println("Mật khẩu đã được thay đổi");
                     return;
                 }
@@ -128,14 +127,14 @@ ViewCustomer viewCustomer = new ViewCustomer();
         }
     }
 
-    public boolean validateUserName(String regex){
+    public boolean validateUserName(String regex) {
         Pattern pattern = Pattern.compile("^[A-Za-z0-9].{6,20}$");
         Matcher matcher = pattern.matcher(regex);
         return matcher.matches();
     }
 
 
-    public boolean validatePassWord(String regex){
+    public boolean validatePassWord(String regex) {
         Pattern pattern = Pattern.compile("^[A-Z][A-Za-z0-9].{6,}$");
         Matcher matcher = pattern.matcher(regex);
         return matcher.matches();
@@ -169,7 +168,7 @@ ViewCustomer viewCustomer = new ViewCustomer();
                 int age = parseInt(txt[3]);
                 String sdt = txt[4];
                 String gender = txt[5];
-                accounts.add(new Account(username, password,name,age,sdt,gender));
+                accounts.add(new Account(username, password, name, age, sdt, gender));
             }
             bufferedReader.close();
             fileReader.close();
@@ -185,7 +184,7 @@ ViewCustomer viewCustomer = new ViewCustomer();
             FileWriter fileWriter = new FileWriter("accCustomer.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Account account : accounts) {
-                bufferedWriter.write(account.getUsername()+ ", "+ account.getPassword()+ ", "+account.getName()+", "+account.getAge()+", "+account.getSdt()+", "+account.getGender());
+                bufferedWriter.write(account.getUsername() + ", " + account.getPassword() + ", " + account.getName() + ", " + account.getAge() + ", " + account.getSdt() + ", " + account.getGender());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();
@@ -194,6 +193,7 @@ ViewCustomer viewCustomer = new ViewCustomer();
             e.printStackTrace();
         }
     }
+
     public boolean validateSdt(String regex) {
         Pattern pattern = Pattern.compile("^[0-9]{10}$");
         Matcher matcher = pattern.matcher(regex);

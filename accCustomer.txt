@@ -1,4 +1,3 @@
 hungchivang, Hung12345*, hungchivang, 25, 0366666666, nam
 kien123, Kienkien*, kien, 23, 0111111111, nam
-phuong123, Phuong123*, phuong, 30, 1234567890, nam
-hung123, Hung123*, hungg, 34, 1456325456, nu
+phuong123, Phuong123*, hungchivang, 25, 0366666666, nam

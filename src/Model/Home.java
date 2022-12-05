@@ -1,6 +1,8 @@
 package Model;
 
-public class Hotel {
+import java.io.Serializable;
+
+public class Home implements Serializable {
     private int roomId;
     private int numberRoom;
     private double price;
@@ -15,10 +17,10 @@ public class Hotel {
     private String sdt;
     private String gender;
 
-    public Hotel() {
+    public Home() {
     }
 
-    public Hotel(int roomId, int numberRoom, double price, String address, String describe, String status, String username, String password, String name, int age, String sdt, String gender) {
+    public Home(int roomId, int numberRoom, double price, String address, String describe, String status, String username, String password, String name, int age, String sdt, String gender) {
         this.roomId = roomId;
         this.numberRoom = numberRoom;
         this.price = price;
@@ -33,7 +35,7 @@ public class Hotel {
         this.gender = gender;
     }
 
-    public Hotel(int roomId, int numberRoom, double price, String address, String describe, String status, String name, int age, String sdt, String gender) {
+    public Home(int roomId, int numberRoom, double price, String address, String describe, String status, String name, int age, String sdt, String gender) {
         this.roomId = roomId;
         this.numberRoom = numberRoom;
         this.price = price;

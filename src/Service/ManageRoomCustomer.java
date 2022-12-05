@@ -2,12 +2,9 @@ package Service;
 
 import Compare.CompareByNumberRoom;
 import Compare.CompareByPrice;
-import Model.Account;
 import Model.Room;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +15,6 @@ public class ManageRoomCustomer {
     Scanner scanner = new Scanner(System.in);
     List<Room> listRoom = new ArrayList<>();
 
-    Account account = new Account();
 
     public void showRoom() {
         for (Room customer : listRoom) {
@@ -27,14 +23,69 @@ public class ManageRoomCustomer {
     }
 
     public void showRoomBooked(){
-        for (int i = 0; i < listRoom.size(); i++) {
-            if(listRoom.get(i).getStatus().equals(" Đã đặt")){
-                System.out.println(listRoom.get(i).toString());
+        for (Room room : listRoom) {
+            if (room.getStatus().equals("Đã đặt")) {
+                System.out.println(room);
             }
         }
     }
 
     public void showRoomNotBook(){
+        for (Room room : listRoom) {
+            if (room.getStatus().equals("yes")) {
+                System.out.println(room);
+            }
+        }
+    }
+
+    public void readFile() {
+        FileInputStream fis =null;
+        ObjectInputStream ois  = null;
+        try {
+            fis =new FileInputStream("roomAdmin.txt");
+            ois = new ObjectInputStream(fis);
+            listRoom = (List<Room>) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(fis != null) {
+                    fis.close();
+                }
+                if (ois != null) {
+                    ois.close();
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void writeFile() {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos  = null;
+        try {
+            fos = new FileOutputStream("roomAdmin.txt");
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(listRoom);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(fos != null) {
+                    fos.close();
+                }
+                if (oos != null) {
+                    oos.close();
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void sortByPrice() {
+        listRoom.sort(new CompareByPrice());
         for (int i = 0; i < listRoom.size(); i++) {
             if(listRoom.get(i).getStatus().equals("yes")){
                 System.out.println(listRoom.get(i).toString());
@@ -42,133 +93,45 @@ public class ManageRoomCustomer {
         }
     }
 
-    public List<Room> copyFile() {
-        try {
-            FileReader input = new FileReader("roomAdmin.txt");
-            FileWriter output = new FileWriter("roomCustomer.txt");
-            int line;
-            while ((line = input.read()) != -1) {
-                output.write(line);
-            }
-            output.close();
-            input.close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return listRoom;
-    }
-
-    public List<Room> readFile() {
-        try {
-            FileReader fileReader = new FileReader("roomCustomer.txt");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            while (true) {
-                line = bufferedReader.readLine();
-                if (line == null) {
-                    break;
-                }
-                String[] txt = line.split(", ");
-                int roomId = parseInt(txt[0]);
-                int numberRoom = parseInt(txt[1]);
-                double price = Double.parseDouble(txt[2]);
-                String address = txt[3];
-                String describe = txt[4];
-                String status = txt[5];
-                listRoom.add(new Room(roomId, numberRoom, price, address, describe, status));
-            }
-            bufferedReader.close();
-            fileReader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listRoom;
-    }
-
-    public void writeFile(List<Room> listRoom) {
-        try {
-            FileWriter fileWriter = new FileWriter("roomCustomer.txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Room room : listRoom) {
-                bufferedWriter.write(room.getRoomId()+ ", "+ room.getNumberRoom()+", "+room.getPrice()
-                        +", "+room.getAddress()+", "+room.getDescribe()
-                        + ", "+room.getStatus()+", "+ account.getUsername()+", "+account.getAge()+", "
-                +account.getSdt()+", "+ account.getGender());
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-            fileWriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sortByPrice() {
-        listRoom.sort(new CompareByPrice());
-        System.out.println(listRoom);
-    }
-
     public void sortByNumberRoom() {
         listRoom.sort(new CompareByNumberRoom());
-        System.out.println(listRoom);
-    }
-
-    public void SearchByPrice1() {
         for (int i = 0; i < listRoom.size(); i++) {
-            if (listRoom.get(i).getPrice() >= 1000 && listRoom.get(i).getPrice() <= 2500) {
-                System.out.println("Danh sách tìm kiếm theo giá từ 1000 -> 2500 ");
-                System.out.println(listRoom);
-            }
-        }
-    }
-
-    public void SearchByPrice2() {
-        for (int i = 0; i < listRoom.size(); i++) {
-            if (listRoom.get(i).getPrice() > 2500 && listRoom.get(i).getPrice() <= 4000) {
-                System.out.println("Danh sách tìm kiếm theo giá từ 2500 -> 4000 ");
-                System.out.println(listRoom);
-            }
-        }
-    }
-
-    public void SearchByPrice3() {
-        for (int i = 0; i < listRoom.size(); i++) {
-            if (listRoom.get(i).getPrice() > 4000) {
-                System.out.println("Danh sách tìm kiếm theo giá trên 4000 ");
-                System.out.println(listRoom);
-            }
-        }
-    }
-
-
-
-    public void SearchByAddress(String name) {
-        for (int i = 0; i < listRoom.size(); i++) {
-            if (listRoom.get(i).getAddress().contains(name)) {
-                System.out.println("Danh sách tìm kiếm theo địa chỉ");
+            if(listRoom.get(i).getStatus().equals("yes")){
                 System.out.println(listRoom.get(i).toString());
             }
         }
     }
 
-    public boolean checkStatus() {
-        String status = "yes";
-        for (Room customer : listRoom) {
-            if (customer.getStatus().equals(status)) {
-                return true;
+    public void SearchByPrice1() {
+        for (Room room : listRoom) {
+            if (room.getPrice() >= 1000 && room.getPrice() <= 2500) {
+                System.out.println(room);
             }
         }
-        return false;
     }
 
-    public boolean checkStatusCancle() {
-        String status = " Đã đặt";
-        for (Room customer : listRoom) {
-            if (customer.getStatus().equals(status)) {
-                return true;
+    public void SearchByPrice2() {
+        for (Room room : listRoom) {
+            if (room.getPrice() > 2500 && room.getPrice() <= 4000) {
+                System.out.println(room);
             }
         }
-        return false;
+    }
+
+    public void SearchByPrice3() {
+        for (Room room : listRoom) {
+            if (room.getPrice() > 4000) {
+                System.out.println(room);
+            }
+        }
+    }
+
+    public void SearchByAddress(String name) {
+        for (Room room : listRoom) {
+            if (room.getAddress().contains(name)) {
+                System.out.println(room);
+            }
+        }
     }
 
     public int CheckRoomID(int id) {
@@ -182,14 +145,14 @@ public class ManageRoomCustomer {
         int index = CheckRoomID(id);
         if (index >= 0) {
             for (int i = 0; i < listRoom.size(); i++) {
-                if (checkStatus()) {
-                    String status = " Đã đặt";
+                if (listRoom.get(index).getStatus().equals("yes")) {
+                    String status = "Đã đặt";
                     listRoom.set(index, new Room(id, listRoom.get(index).getNumberRoom(), listRoom.get(index).getPrice(), listRoom.get(index).getAddress(), listRoom.get(index).getDescribe(), status));
                     System.out.println("Đặt phòng thành công");
                     return;
                 }
             }
-            System.out.println("Đã có người đặt");
+            System.out.println("Không thể đặt phòng");
         } else {
             System.out.println("Không có  id phòng này");
         }
@@ -199,8 +162,8 @@ public class ManageRoomCustomer {
         int index = CheckRoomID(id);
         if (index >= 0) {
             for (int i = 0; i < listRoom.size(); i++) {
-                if (checkStatusCancle()) {
-                    String status = " yes";
+                if (listRoom.get(index).getStatus().equals("Đã đặt")) {
+                    String status = "yes";
                     listRoom.set(index, new Room(id, listRoom.get(index).getNumberRoom(), listRoom.get(index).getPrice(), listRoom.get(index).getAddress(), listRoom.get(index).getDescribe(), status));
                     System.out.println("Hủy phòng thành công");
                     return;

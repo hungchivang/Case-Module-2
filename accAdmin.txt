@@ -1,1 +1,1 @@
-admin123, Admin12345*
+admin, admin

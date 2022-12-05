@@ -1,10 +1,8 @@
 package Service;
 
 import Model.Room;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,8 +17,17 @@ public class ManageRoomAdmin {
             System.out.println(room.toString());
         }
     }
-
     public Room CreateRoom(){
+        int roomId = 1;
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.size() == 0) {
+                roomId = 1;
+
+            } else {
+                roomId = rooms.get(rooms.size()-1).getRoomId() +1;
+            }
+        }
+
         System.out.println("Nhập số phòng");
         int numberRoom = validateInt();
         System.out.println("Nhâp giá");
@@ -31,16 +38,19 @@ public class ManageRoomAdmin {
         String describe = scanner.nextLine();
         System.out.println("Tình trạng ");
         String status = validateStatus();
-        return new Room(numberRoom, price,address,describe,status);
+
+        return new Room(roomId,numberRoom, price,address,describe,status);
     }
 
     public void add(){
         rooms.add(CreateRoom());
     }
 
+
+
     public int CheckRoomID(int id) {
         for (int i = 0; i < rooms.size(); i++) {
-            if (rooms.get(i).getRoomId() ==id) return i;
+            if (rooms.get(i).getRoomId() == id) return i;
         }
         return -1;
     }
@@ -106,45 +116,49 @@ public class ManageRoomAdmin {
         }
     }
 
-    public List<Room> readRoom() {
+    public void readRoom() {
+        FileInputStream fis =null;
+        ObjectInputStream ois  = null;
         try {
-            FileReader fileReader = new FileReader("roomAdmin.txt");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String line;
-            while (true) {
-                line = bufferedReader.readLine();
-                if (line == null) {
-                    break;
-                }
-                String[] txt = line.split(", ");
-                int roomId = Integer.parseInt(txt[0]);
-                int numberRoom = Integer.parseInt(txt[1]);
-                double price = Double.parseDouble(txt[2]);
-                String address = txt[3];
-                String describe = txt[4];
-                String status = txt[5];
-                rooms.add(new Room(roomId,numberRoom,price,address,describe,status));
-            }
-            bufferedReader.close();
-            fileReader.close();
+            fis =new FileInputStream("roomAdmin.txt");
+            ois = new ObjectInputStream(fis);
+            rooms = (List<Room>) ois.readObject();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(fis != null) {
+                    fis.close();
+                }
+                if (ois != null) {
+                    ois.close();
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        return rooms;
     }
 
-        public void writeRoom(List<Room> rooms) {
+    public void writeRoom() {
+        FileOutputStream fos =null;
+        ObjectOutputStream oos  = null;
         try {
-            FileWriter fileWriter = new FileWriter("roomAdmin.txt");
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            for (Room room : rooms) {
-                bufferedWriter.write(room.getRoomId()+ ", "+ room.getNumberRoom()+", "+room.getPrice()+", "+room.getAddress()+", "+room.getDescribe()+ ", "+room.getStatus());
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.close();
-            fileWriter.close();
+            fos = new FileOutputStream("roomAdmin.txt");
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(rooms);
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if(fos != null) {
+                    fos.close();
+                }
+                if (oos != null) {
+                    oos.close();
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
