@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acfb8f0a-d1f6-4768-908e-c312b4100917" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accAdmin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/accAdmin.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accCustomer.txt" beforeDir="false" afterPath="$PROJECT_DIR$/accCustomer.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/roomAdmin.txt" beforeDir="false" afterPath="$PROJECT_DIR$/roomAdmin.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Service/ManageAccountCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageAccountCustomer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ManageHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ManageRoomCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ManageRoomCustomer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ViewCustomer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewCustomer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ViewAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewAdmin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

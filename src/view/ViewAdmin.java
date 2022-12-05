@@ -1,7 +1,6 @@
 package view;
 
 import Model.Account;
-import Model.Room;
 import Service.ManageAccountAdmin;
 import Service.ManageRoomAdmin;
 import Service.ManageHome;
@@ -65,8 +64,10 @@ public class ViewAdmin {
                     manageAccountAdmin.showAccCustomer();
                     break;
                 case 9:
+                    manageRoomAdmin.writeRoom();
                     return;
                 case 0:
+                    manageAccountAdmin.writeAdmin(accountAdmin);
                     manageRoomAdmin.writeRoom();
                     System.exit(0);
             }

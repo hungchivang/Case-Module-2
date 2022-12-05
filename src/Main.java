@@ -15,8 +15,8 @@ public class Main {
         List<Account> accounts = manageAccountCustomer.readCustomer();
 
 
-        int choice = -1;
-        while (choice != 0) {
+        int choice ;
+        while (true) {
             System.out.println("-----------------------");
             System.out.println("1. Admin");
             System.out.println("2. User");
@@ -37,14 +37,18 @@ public class Main {
                         System.out.println("-----------------");
                         choice1 = manageAccountCustomer.validateInt();
                         switch (choice1) {
-                            case 1 -> manageAccountCustomer.Login();
-                            case 2 -> manageAccountCustomer.Register();
-                            case 0 -> manageAccountCustomer.writeCustomer(accounts);
+                            case 1 : manageAccountCustomer.Login();
+                            break;
+                            case 2 : manageAccountCustomer.Register();
+                            break;
+                            case 0 : manageAccountCustomer.writeCustomer(accounts);
+                            break;
+
                         }
                     }
                     break;
                 case 0:
-                    break;
+                    System.exit(0);
             }
         }
     }

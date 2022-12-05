@@ -192,13 +192,14 @@ public class ManageAccountCustomer {
                                 manageAccountCustomer.writeCustomer(accounts);
                                 break;
                             case 9:
+                                manageRoomCustomer.writeFile();
                                 return;
                             case 0:
+                                manageAccountCustomer.writeCustomer(accounts);
                                 manageRoomCustomer.writeFile();
                                 System.exit(0);
                         }
                     }
-
                 }
             }
             System.out.println("Mật khẩu sai");
@@ -218,7 +219,7 @@ public class ManageAccountCustomer {
                 if (accounts.get(index).getPassword().equals(password)) {
                     System.out.println("Nhập mật khẩu mới");
                     String newPassword = scanner.nextLine();
-                    accounts.set(index, new Account(username, newPassword, accounts.get(i).getName(), accounts.get(i).getAge(), accounts.get(i).getSdt(), accounts.get(i).getGender()));
+                    accounts.set(index, new Account(username, newPassword, accounts.get(index).getName(), accounts.get(index).getAge(), accounts.get(index).getSdt(), accounts.get(index).getGender()));
                     System.out.println("Mật khẩu đã được thay đổi");
                     return;
                 }
