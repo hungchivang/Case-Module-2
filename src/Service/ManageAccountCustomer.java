@@ -47,7 +47,7 @@ public class ManageAccountCustomer {
                 if (validatePassWord(password)) {
                     break;
                 } else {
-                    System.out.println("Xin vui lòng viết hoa chữ cái đầu tiên và ít nhất 8 kí tự");
+                    System.out.println("viết hoa chữ cái đầu tiên, kí tự và ít nhất 8 kí tự");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -112,7 +112,7 @@ public class ManageAccountCustomer {
                         System.out.println("6. Hiển thị phòng đã đặt");
                         System.out.println("7. Thanh toán");
                         System.out.println("8. Hiển thị phòng còn trống");
-                        System.out.println("9. Đổi mật khẩu");
+                        System.out.println("9. Đổi thông tin");
                         System.out.println("10. Đăng xuất");
                         System.out.println("0. Thoát");
                         System.out.println("---------------------");
@@ -124,6 +124,7 @@ public class ManageAccountCustomer {
                                     System.out.println("---------------------");
                                     System.out.println("1. Sắp xếp theo giá");
                                     System.out.println("2. Sắp xếp theo số phòng");
+                                    System.out.println("3. Sắp xếp theo id");
                                     System.out.println("0. Exit");
                                     System.out.println("---------------------");
                                     choice2 = manageRoomCustomer.validateInt();
@@ -134,6 +135,8 @@ public class ManageAccountCustomer {
                                         case 2:
                                             manageRoomCustomer.sortByNumberRoom();
                                             break;
+                                        case 3:
+                                            manageRoomCustomer.sortByRoomId();
                                         case 0:
                                             break;
                                     }
@@ -176,12 +179,12 @@ public class ManageAccountCustomer {
                             case 4:
                                 System.out.println("Nhập số phòng cần đặt");
                                 int roomIdBook = manageRoomCustomer.validateInt();
-                                manageRoomCustomer.bookRoom(roomIdBook,username);
+                                manageRoomCustomer.bookRoom(roomIdBook, username);
                                 break;
                             case 5:
                                 System.out.println("Nhập số phòng cần hủy");
                                 int roomIdCancel = manageRoomCustomer.validateInt();
-                                manageRoomCustomer.CancelRoom(roomIdCancel,username);
+                                manageRoomCustomer.CancelRoom(roomIdCancel, username);
                                 break;
                             case 6:
                                 manageRoomCustomer.showRoomBooked(username);
@@ -193,14 +196,39 @@ public class ManageAccountCustomer {
                                 manageRoomCustomer.showRoomNotBook();
                                 break;
                             case 9:
-                                manageAccountCustomer.SetPassword();
-                                manageAccountCustomer.writeCustomer(accounts);
+                                int choice4 = -1;
+                                while (choice4 != 0) {
+                                    System.out.println("---------------------");
+                                    System.out.println("1. Đổi thông tin cá nhân");
+                                    System.out.println("2. Đổi mật khẩu");
+                                    System.out.println("3. Thay đổi ngày checkIn , checkOut");
+                                    System.out.println("0. Exit");
+                                    System.out.println("---------------------");
+                                    choice4 = manageRoomCustomer.validateInt();
+                                    switch (choice4) {
+                                        case 1:
+                                            SetInfo(username);
+                                            writeCustomer(accounts);
+                                            break;
+                                        case 2:
+                                            SetPassword();
+                                            writeCustomer(accounts);
+                                            break;
+                                        case 3:
+                                            System.out.println("Nhập id cần sửa");
+                                            int id = validateInt();
+                                            manageRoomCustomer.editDate(id, username);
+                                            manageRoomCustomer.writeFile();
+                                        case 0:
+                                            break;
+                                    }
+                                }
                                 break;
                             case 10:
                                 manageRoomCustomer.writeFile();
                                 return;
                             case 0:
-                                manageAccountCustomer.writeCustomer(accounts);
+                                writeCustomer(accounts);
                                 manageRoomCustomer.writeFile();
                                 System.exit(0);
                         }
@@ -230,6 +258,51 @@ public class ManageAccountCustomer {
                 }
             }
             System.out.println("Mật khẩu sai");
+        } else {
+            System.out.println("Tài khoản không tồn tại");
+        }
+    }
+
+    public void SetInfo(String username) {
+        int index = CheckUsername(username);
+        if (index >= 0) {
+            while (true) {
+                System.out.println("---------------------");
+                System.out.println("Thông tin muốn sửa :");
+                System.out.println("1. Thay đổi tên\n" +
+                        "2. Thay đổi tuổi\n" +
+                        "3. Thay đổi địa chỉ\n" +
+                        "4. Thay đổi giới tính\n" +
+                        "5. OK");
+                System.out.println("Chọn ");
+                System.out.println("---------------------");
+                int choice = Integer.parseInt(scanner.nextLine());
+                switch (choice) {
+                    case 1:
+                        System.out.println("Nhập tên cần thay đôỉ");
+                        String name = scanner.nextLine();
+                        accounts.set(index, new Account(accounts.get(index).getUsername(), accounts.get(index).getPassword(), name, accounts.get(index).getAge(), accounts.get(index).getSdt(), accounts.get(index).getGender()));
+                        break;
+                    case 2:
+                        System.out.println("Nhập tuổi cần thay đổi");
+                        int age = validateAge();
+                        accounts.set(index, new Account(accounts.get(index).getUsername(), accounts.get(index).getPassword(), accounts.get(index).getName(), age, accounts.get(index).getSdt(), accounts.get(index).getGender()));
+                        break;
+                    case 3:
+                        System.out.println("Nhập số điện thoại");
+                        String sdt = scanner.nextLine();
+                        accounts.set(index, new Account(accounts.get(index).getUsername(), accounts.get(index).getPassword(), accounts.get(index).getName(), accounts.get(index).getAge(), sdt, accounts.get(index).getGender()));
+                        break;
+                    case 4:
+                        System.out.println("Thay đôỉ giới tinh");
+                        String gender = validateGender();
+                        accounts.set(index, new Account(accounts.get(index).getUsername(), accounts.get(index).getPassword(), accounts.get(index).getName(), accounts.get(index).getAge(), accounts.get(index).getSdt(), gender));
+                        break;
+                    case 5:
+                        return;
+                }
+                System.out.println("Đã sửa thông tin");
+            }
         } else {
             System.out.println("Tài khoản không tồn tại");
         }

@@ -2,6 +2,7 @@ package Service;
 
 import Model.Account;
 import Model.Home;
+import Model.Room;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -10,8 +11,9 @@ import java.util.List;
 
 public class ManageHome {
     List<Home> homes = new ArrayList<>();
-ManageAccountCustomer manageAccountCustomer= new ManageAccountCustomer();
+    ManageAccountCustomer manageAccountCustomer = new ManageAccountCustomer();
     List<Account> accounts = manageAccountCustomer.readCustomer();
+
 
     public void readHome() {
         FileInputStream fis = null;
@@ -41,20 +43,21 @@ ManageAccountCustomer manageAccountCustomer= new ManageAccountCustomer();
             for (int j = 0; j < accounts.size(); j++) {
                 if (homes.get(i).getStatus().equals("Đã đặt") && homes.get(i).getUsername().equals(accounts.get(j).getUsername())) {
                     System.out.println("roomId = " + homes.get(i).getRoomId() +
-                            ", price = " + homes.get(i).getPrice() +
                             ", name = " + accounts.get(j).getName() +
                             ", age = " + accounts.get(j).getAge() +
                             ", sdt = " + accounts.get(j).getSdt() +
-                            ", gender = " + accounts.get(j).getGender());
+                            ", gender = " + accounts.get(j).getGender() +
+                            ", gender = " + homes.get(i).getStatus() +
+                            ", dayIn = " + homes.get(i).getDayIn() +
+                            ", dayOut = " + homes.get(i).getDayOut());
                 }
             }
-
         }
     }
 
     public void showRoomNotBook() {
         for (Home home : homes) {
-            if (home.getStatus().equals("yes")) {
+            if (!home.getStatus().equals("Đã đặt")) {
                 System.out.println("roomId = " + home.getRoomId() +
                         ", numberRoom = " + home.getNumberRoom() +
                         ", price = " + home.getPrice() +

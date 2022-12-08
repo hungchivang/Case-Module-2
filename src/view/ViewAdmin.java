@@ -41,11 +41,13 @@ public class ViewAdmin {
                     System.out.println("Nhập id cần xóa");
                     int idDelete = manageRoomAdmin.validateInt();
                     manageRoomAdmin.Delete(idDelete);
+                    manageRoomAdmin.writeRoom();
                     break;
                 case 3:
                     System.out.println("Nhập id cần sửa");
                     int idEdit = manageRoomAdmin.validateInt();
                     manageRoomAdmin.Edit(idEdit);
+                    manageRoomAdmin.writeRoom();
                     break;
                 case 4:
                     manageRoomAdmin.show();

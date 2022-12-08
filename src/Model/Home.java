@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Home implements Serializable {
     private int roomId;
@@ -16,6 +17,24 @@ public class Home implements Serializable {
     private int age;
     private String sdt;
     private String gender;
+    private LocalDate dayIn;
+    private LocalDate dayOut;
+
+    public LocalDate getDayIn() {
+        return dayIn;
+    }
+
+    public void setDayIn(LocalDate dayIn) {
+        this.dayIn = dayIn;
+    }
+
+    public LocalDate getDayOut() {
+        return dayOut;
+    }
+
+    public void setDayOut(LocalDate dayOut) {
+        this.dayOut = dayOut;
+    }
 
     public Home() {
     }
